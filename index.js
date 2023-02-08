@@ -19,18 +19,17 @@ http.createServer(function (req, res) {
     const nodemailer = require("nodemailer");
     const request = require("request");
 
-    // Define the email details
+
     const email = {
         from: process.env.SENDER_NAME,
         to: process.env.RECEIVERS,
         subject: "Today",
         html: `<html>
             <body>
-				<h3>Good Morning!</h3>
+	    	<h3>Good Morning!</h3>
             </body>
         </html>`,
-        attachments: [
-		]
+        attachments: []
     };
 
 
