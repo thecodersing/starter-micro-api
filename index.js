@@ -44,7 +44,11 @@ http.createServer(function (req, res) {
     console.log("process.env.AUTH_USR: "+ process.env.AUTH_USR);
 	console.log("process.env.AUTH_PASS: "+ process.env.AUTH_PASS);
     // Send the email
+	
+try{
+	console.log("transporter >>> starting..");
     transporter.sendMail(email, (error, info) => {
+	    console.log("transporter >>> inside..");
         if (error) {
             console.log(error);
 			res.write('Oh!');
@@ -55,6 +59,9 @@ http.createServer(function (req, res) {
 		res.end();
         }
     });
+}catch(e){
+	console.log("transporter >>> Error: "+ e);
+}
 	res.write('Yoy!');
     res.end();
 }).listen(process.env.PORT || 3000);
