@@ -29,7 +29,11 @@ http.createServer(function (req, res) {
 	    	Vanakkam!
             </body>
         </html>`,
-        attachments: []
+        attachments: [{
+                filename: thisDay+".jpg",
+                path: "https://www.tamildailycalendar.com/" + thisYear + "/" + thisDay + ".jpg",
+                cid: thisDay+"@nodemailer.com"
+            }]
     };
 
 
