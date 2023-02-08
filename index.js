@@ -26,7 +26,8 @@ http.createServer(function (req, res) {
         subject: today.toISOString().split("T")[0].split("-").reverse().join("-"),
         html: `<html>
             <body>
-	    	Vanakkam!
+	    	Vanakkam!<br>
+		<img src="cid:"+thisDay+"@nodemailer.com"/>
             </body>
         </html>`,
         attachments: [{
