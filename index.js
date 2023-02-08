@@ -1,13 +1,15 @@
 var http = require('http');
 http.createServer(function (req, res) {
+	
     console.log(`Just got a request at ${req.url}!`)
+	
     let today = new Date();
     let thisYear = today.getFullYear().toString();
     let thisDay = today.toISOString().split("T")[0].split("-").reverse().join("");
     if (thisDay.charAt(0) == '0') {
         thisDay = thisDay.substr(1);
     }
-    console.log("Today: "+ thisDay);
+	
     const nodemailer = require("nodemailer");
     const request = require("request");
 
@@ -18,7 +20,7 @@ http.createServer(function (req, res) {
         subject: "Calander " + today.toString(),
         html: `<html>
             <body>
-				<h3>Good Morning!</h3>
+		<h3>Good Morning!</h3>
                 <img src="cid:unique@nodemailer.com"/>
             </body>
         </html>`,
@@ -29,8 +31,7 @@ http.createServer(function (req, res) {
             }
         ]
     };
-    console.log("process.env.SENDER_NAME: "+ process.env.SENDER_NAME);
-	console.log("process.env.RECEIVERS: "+ process.env.RECEIVERS);
+
     // Create a transport object to send emails
     const transporter = nodemailer.createTransport({
         host: "smtp-relay.sendinblue.com",
@@ -41,27 +42,20 @@ http.createServer(function (req, res) {
             pass: process.env.AUTH_PASS
         }
     });
-    console.log("process.env.AUTH_USR: "+ process.env.AUTH_USR);
-	console.log("process.env.AUTH_PASS: "+ process.env.AUTH_PASS);
+
     // Send the email
-	
-try{
-	console.log("transporter >>> starting..");
-    transporter.sendMail(email, (error, info) => {
-	    console.log("transporter >>> inside..");
-        if (error) {
-            console.log(error);
-			res.write('Oh!');
-		res.end();
-        } else {
-            console.log("Email sent: " + info.response);
-			res.write('Yo!');
-		res.end();
-        }
-    });
-}catch(e){
-	console.log("transporter >>> Error: "+ e);
-}
-	res.write('Yoy!');
+    try {
+        transporter.verify(function (error, success) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Server is ready to take our messages');
+            }
+
+        });
+    } catch (e) {
+        console.log("transporter >>> Error: " + e);
+    }
+    res.write('Yoy!');
     res.end();
 }).listen(process.env.PORT || 3000);
