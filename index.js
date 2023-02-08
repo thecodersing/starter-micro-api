@@ -3,7 +3,7 @@ http.createServer(function (req, res) {
 
     console.log(`Just got a request at ${req.url}!`)
 	
-	if(req.url != "cal"){
+	if(req.url != "/cal"){
 		res.write('Tata!');
 		res.end();
 		return;
