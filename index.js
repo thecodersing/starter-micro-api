@@ -1,15 +1,15 @@
 var http = require('http');
 http.createServer(function (req, res) {
-	
+
     console.log(`Just got a request at ${req.url}!`)
-	
+
     let today = new Date();
     let thisYear = today.getFullYear().toString();
     let thisDay = today.toISOString().split("T")[0].split("-").reverse().join("");
     if (thisDay.charAt(0) == '0') {
         thisDay = thisDay.substr(1);
     }
-	
+
     const nodemailer = require("nodemailer");
     const request = require("request");
 
@@ -50,8 +50,18 @@ http.createServer(function (req, res) {
                 console.log(error);
             } else {
                 console.log('Server is ready to take our messages');
+                transporter.sendMail(email, function (error, success) {
+                    if (error) {
+                        console.log("Error");
+                        console.log(error);
+                        res.write('Oh!');
+                    } else {
+                        console.log("Success");
+                        console.log("Email sent: " + success.response);
+                        res.write('Yo!');
+                    }
+                });
             }
-
         });
     } catch (e) {
         console.log("transporter >>> Error: " + e);
