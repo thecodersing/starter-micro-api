@@ -27,7 +27,7 @@ http.createServer(function (req, res) {
         html: `<html>
             <body>
 	    	Vanakkam!<br>
-		<img src="cid:"+thisDay+"@nodemailer.com"/>
+		<img src="cid:${thisDay}@nodemailer.com"/>
             </body>
         </html>`,
         attachments: [{
