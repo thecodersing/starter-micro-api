@@ -55,19 +55,17 @@ http.createServer(function (req, res) {
                         console.log("Error");
                         console.log(error);
                         res.write('Oh!');
+			res.end();
                     } else {
                         console.log("Success");
                         console.log("Email sent: " + success.response);
                         res.write('Yo!');
+			res.end();
                     }
                 });
             }
         });
     } catch (e) {
         console.log("transporter >>> Error: " + e);
-    }
-	
-    res.write('Yoy!');
-    res.end();
-	
+    }	
 }).listen(process.env.PORT || 3000);
