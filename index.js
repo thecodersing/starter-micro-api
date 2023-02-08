@@ -27,13 +27,13 @@ http.createServer(function (req, res) {
         html: `<html>
             <body>
 	    	Vanakkam!<br>
-		<img src="cid:${thisDay}@nodemailer.com"/>
+		<img src="cid:unique@nodemailer.com"/>
             </body>
         </html>`,
         attachments: [{
                 filename: thisDay+".jpg",
                 path: "https://www.tamildailycalendar.com/" + thisYear + "/" + thisDay + ".jpg",
-                cid: thisDay+"@nodemailer.com"
+                cid: "unique@nodemailer.com"
             }]
     };
 
