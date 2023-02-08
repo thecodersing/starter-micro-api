@@ -17,13 +17,14 @@ http.createServer(function (req, res) {
     const email = {
         from: process.env.SENDER_NAME,
         to: process.env.RECEIVERS,
-        subject: today.toString(),
+        subject: "Today",
         html: `<html>
             <body>
-				<h3>Good Morning!</h3>
+		<h3>Good Morning!</h3>
             </body>
         </html>`,
-        attachments: []
+        attachments: [
+	]
     };
 
     // Create a transport object to send emails
