@@ -23,10 +23,10 @@ http.createServer(function (req, res) {
     const email = {
         from: process.env.SENDER_NAME,
         to: process.env.RECEIVERS,
-        subject: "Today",
+        subject: today.toISOString().split("T")[0].split("-").reverse().join("-"),
         html: `<html>
             <body>
-	    	<h3>Good Morning!</h3>
+	    	Vanakkam!
             </body>
         </html>`,
         attachments: []
