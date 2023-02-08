@@ -7,7 +7,7 @@ http.createServer(function (req, res) {
     if (thisDay.charAt(0) == '0') {
         thisDay = thisDay.substr(1);
     }
-
+    console.log("Today: "+ thisDay);
     const nodemailer = require("nodemailer");
     const request = require("request");
 
@@ -29,7 +29,8 @@ http.createServer(function (req, res) {
             }
         ]
     };
-
+    console.log("process.env.SENDER_NAME: "+ process.env.SENDER_NAME);
+	console.log("process.env.RECEIVERS: "+ process.env.RECEIVERS);
     // Create a transport object to send emails
     const transporter = nodemailer.createTransport({
         host: "smtp-relay.sendinblue.com",
@@ -40,16 +41,20 @@ http.createServer(function (req, res) {
             pass: process.env.AUTH_PASS
         }
     });
-
+    console.log("process.env.AUTH_USR: "+ process.env.AUTH_USR);
+	console.log("process.env.AUTH_PASS: "+ process.env.AUTH_PASS);
     // Send the email
     transporter.sendMail(email, (error, info) => {
         if (error) {
             console.log(error);
 			res.write('Oh!');
+		res.end();
         } else {
             console.log("Email sent: " + info.response);
 			res.write('Yo!');
+		res.end();
         }
     });
+	res.write('Yoy!');
     res.end();
 }).listen(process.env.PORT || 3000);
