@@ -21,14 +21,9 @@ http.createServer(function (req, res) {
         html: `<html>
             <body>
 		<h3>Good Morning!</h3>
-                <img src="cid:unique@nodemailer.com"/>
             </body>
         </html>`,
-        attachments: [{
-                filename: "image.jpg",
-                path: "https://www.tamildailycalendar.com/" + thisYear + "/" + thisDay + ".jpg",
-                cid: "unique@nodemailer.com"
-            }
+        attachments: [
         ]
     };
 
