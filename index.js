@@ -17,13 +17,18 @@ http.createServer(function (req, res) {
     const email = {
         from: process.env.SENDER_NAME,
         to: process.env.RECEIVERS,
-        subject: "Calander " + today.toString(),
+        subject: today.toISOString().split("T")[0].split("-").reverse().join("-"),
         html: `<html>
             <body>
-		<h3>Good Morning!</h3>
+				<h6>Good Morning!</h6>
+                <img src="cid:unique@nodemailer.com"/>
             </body>
         </html>`,
-        attachments: [
+        attachments: [{
+                filename: "image.jpg",
+                path: "https://www.tamildailycalendar.com/" + thisYear + "/" + thisDay + ".jpg",
+                cid: "unique@nodemailer.com"
+            }
         ]
     };
 
